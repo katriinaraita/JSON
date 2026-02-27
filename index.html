@@ -56,23 +56,19 @@
   
 
     <!-- JSON -->
-    <div class="container mt-4">
-    <h2>JSON</h2>
-    <div id="tulos"></div>
-</div>
-    
+      
     <script>
 
-// 1. Hae JSON ja muuta objektiksi
+// Haetaan tiedosto
 fetch("tietue.json")
     .then(function(response) {
-        return response.json();   // JSON → JavaScript objekti
+        return response.json();   
     })
     .then(function(data) {
 
-        console.log(data); // tarkistus
+        console.log(data); 
 
-        kerro(data); // kutsutaan funktiota
+        kerro(data); 
 
     })
     .catch(function(error) {
@@ -80,13 +76,11 @@ fetch("tietue.json")
     });
 
 
-
-// 2. Kerro-funktio
+// Funktio
 function kerro(data) {
 
     let teksti = "";
 
-    // Ylätason tiedot
     teksti += "<h2>" + data.otsikko + "</h2>";
     teksti += "<p>" + data.kuvaus + "</p>";
     teksti += "<img src='" + data.kuva + "' class='img-fluid mb-3' width='300'>";
@@ -97,7 +91,7 @@ function kerro(data) {
     teksti += "<p><strong>Tunnus:</strong> " + data.opintojakso.tunnus + "</p>";
     teksti += "<p><strong>Opintopisteet:</strong> " + data.opintojakso.opintopisteet + "</p>";
 
-    // Sisältö (FOR-SILMUKKA)
+    // Silmukka - Sisältö
     teksti += "<h4>Sisältö</h4><ul>";
 
     for (let i = 0; i < data.opintojakso.sisalto.length; i++) {
@@ -106,7 +100,8 @@ function kerro(data) {
 
     teksti += "</ul>";
 
-    // Tekniikat (TOINEN FOR-SILMUKKA)
+    //Silmukka - Tekniikat
+
     teksti += "<h4>Tekniikat</h4><ul>";
 
     for (let i = 0; i < data.tekniikat.length; i++) {
