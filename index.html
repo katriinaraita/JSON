@@ -80,16 +80,24 @@ fetch("tietue.json")
     });
 
 
+
 // 2. Kerro-funktio
 function kerro(data) {
 
     let teksti = "";
 
-    // Tulostetaan perustiedot
-    teksti += "<h3>" + data.otsikko + "</h3>";
+    // Ylätason tiedot
+    teksti += "<h2>" + data.otsikko + "</h2>";
     teksti += "<p>" + data.kuvaus + "</p>";
+    teksti += "<img src='" + data.kuva + "' class='img-fluid mb-3' width='300'>";
 
-    // 3. FOR-SILMUKKA (sisältölista)
+    // Opintojakso
+    teksti += "<h3>Opintojakso</h3>";
+    teksti += "<p><strong>Nimi:</strong> " + data.opintojakso.nimi + "</p>";
+    teksti += "<p><strong>Tunnus:</strong> " + data.opintojakso.tunnus + "</p>";
+    teksti += "<p><strong>Opintopisteet:</strong> " + data.opintojakso.opintopisteet + "</p>";
+
+    // Sisältö (FOR-SILMUKKA)
     teksti += "<h4>Sisältö</h4><ul>";
 
     for (let i = 0; i < data.opintojakso.sisalto.length; i++) {
@@ -98,8 +106,21 @@ function kerro(data) {
 
     teksti += "</ul>";
 
+    // Tekniikat (TOINEN FOR-SILMUKKA)
+    teksti += "<h4>Tekniikat</h4><ul>";
+
+    for (let i = 0; i < data.tekniikat.length; i++) {
+        teksti += "<li>" +
+                  data.tekniikat[i].aihe +
+                  " - <a href='" + data.tekniikat[i].linkki + "' target='_blank'>Linkki</a>" +
+                  "</li>";
+    }
+
+    teksti += "</ul>";
+
     document.getElementById("tulos").innerHTML = teksti;
 }
+
         
 </script>
 
