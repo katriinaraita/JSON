@@ -7,28 +7,6 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!--JSON Tuonti -->
-    <script>
-fetch("tietue.json")
-    .then(function(response) {
-        return response.json();   
-    })
-    .then(function(data) {
-
-        console.log(data); 
-
-        document.getElementById("tulos").innerHTML =
-            "<h3>" + data.otsikko + "</h3>" +
-            "<p>" + data.kuvaus + "</p>";
-
-    })
-    .catch(function(error) {
-        console.log("Virhe:", error);
-    });
-</script>
-
-    
 </head>
 
 <body>
@@ -79,13 +57,56 @@ fetch("tietue.json")
 
     <!-- JSON -->
     <div class="container mt-4">
-    <h2>JSON-data</h2>
+    <h2>JSON</h2>
     <div id="tulos"></div>
 </div>
     
+    <script>
+
+// 1. Hae JSON ja muuta objektiksi
+fetch("tietue.json")
+    .then(function(response) {
+        return response.json();   // JSON → JavaScript objekti
+    })
+    .then(function(data) {
+
+        console.log(data); // tarkistus
+
+        kerro(data); // kutsutaan funktiota
+
+    })
+    .catch(function(error) {
+        console.log("Virhe:", error);
+    });
+
+
+// 2. Kerro-funktio
+function kerro(data) {
+
+    let teksti = "";
+
+    // Tulostetaan perustiedot
+    teksti += "<h3>" + data.otsikko + "</h3>";
+    teksti += "<p>" + data.kuvaus + "</p>";
+
+    // 3. FOR-SILMUKKA (sisältölista)
+    teksti += "<h4>Sisältö</h4><ul>";
+
+    for (let i = 0; i < data.opintojakso.sisalto.length; i++) {
+        teksti += "<li>" + data.opintojakso.sisalto[i] + "</li>";
+    }
+
+    teksti += "</ul>";
+
+    document.getElementById("tulos").innerHTML = teksti;
+}
+        
+</script>
 
 </div>
 
+
+    
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
