@@ -53,7 +53,51 @@
 <div class="container mt-5">
 
     <h1>Tehtävä 1 — Osa 2</h1>
-    <p>Tälle sivulle tulee JSON-datan ensimmäinen käsittely.</p>
+
+    <!--JSON-->
+
+    <div class="container mt-5">
+    <div id="tulos"></div>
+</div>
+
+    <script>
+
+        //Haku
+  fetch("tietue2.json")
+    .then(response => response.json())
+    .then(data => kerro(data))
+    .catch(error => console.log("Virhe:", error));
+
+        
+    // Funktio
+function kerro(data) {
+
+    let nimet = "";
+
+    // Silmukka 
+    for (let i = 0; i < data.osallistujat.length; i++) {
+        nimet += "<li>" + data.osallistujat[i] + "</li>";
+    }
+
+    let html = `
+        <h2>${data.toteutus}</h2>
+
+        <img src="${data.kuva}" class="img-fluid mb-3" width="400">
+
+        <p><strong>Osallistujien määrä:</strong> ${data.osallistujien_maara}</p>
+        <p><strong>Toteutuksen aika:</strong> ${data.aika}</p>
+        <p><strong>Toteutuksen kesto:</strong> ${data.kesto}</p>
+
+        <h4>Osallistujat</h4>
+        <ul>
+            ${nimet}
+        </ul>
+    `;
+
+    document.getElementById("tulos").innerHTML = html;
+}    
+
+</script>
 
 </div>
 
