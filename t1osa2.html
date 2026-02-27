@@ -68,34 +68,28 @@
     .then(data => kerro(data))
     .catch(error => console.log("Virhe:", error));
 
-        
-    // Funktio
-function kerro(data) {
+let nimet = "";
 
-    let nimet = "";
-
-    // Silmukka 
-
-    let nimet = "";
 for (let i = 0; i < data.osallistujat.length; i++) {
+
     nimet += data.osallistujat[i];
-if (i < data.osallistujat.length - 1) {
-    nimet += ", ";
+
+    if (i < data.osallistujat.length - 1) {
+        nimet += ", ";
+    }
 }
 
-    let html = `
-        <h2>${data.toteutus}</h2>
+let html = `
+    <h2>${data.toteutus}</h2>
 
-        <img src="${data.kuva}" class="img-fluid mb-3" width="400">
+    <img src="${data.kuva}" class="img-fluid mb-3" width="400">
 
-        <p><strong>Osallistujien määrä:</strong> ${data.osallistujien_maara}</p>
-        <p> ${data.aika}</p>
-        <p><strong>Toteutuksen kesto:</strong> ${data.kesto}</p>
-        <p><strong>Osallistujat:</strong> ${nimet}</p>
-    `;
+    <p><strong>Osallistujien määrä:</strong> ${data.osallistujien_maara}</p>
+    <p>${data.aika}</p>
+    <p><strong>Kesto:</strong> ${data.kesto}</p>
 
-    document.getElementById("tulos").innerHTML = html;
-}    
+    <p><strong>Osallistujat:</strong> ${nimet}</p>
+`;  
 
 </script>
 
