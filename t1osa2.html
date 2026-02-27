@@ -75,9 +75,13 @@ function kerro(data) {
     let nimet = "";
 
     // Silmukka 
-    for (let i = 0; i < data.osallistujat.length; i++) {
-        nimet += "<li>" + data.osallistujat[i] + "</li>";
-    }
+
+    let nimet = "";
+for (let i = 0; i < data.osallistujat.length; i++) {
+    nimet += data.osallistujat[i];
+if (i < data.osallistujat.length - 1) {
+    nimet += ", ";
+}
 
     let html = `
         <h2>${data.toteutus}</h2>
@@ -85,13 +89,9 @@ function kerro(data) {
         <img src="${data.kuva}" class="img-fluid mb-3" width="400">
 
         <p><strong>Osallistujien määrä:</strong> ${data.osallistujien_maara}</p>
-        <p><strong>Toteutuksen aika:</strong> ${data.aika}</p>
+        <p> ${data.aika}</p>
         <p><strong>Toteutuksen kesto:</strong> ${data.kesto}</p>
-
-        <h4>Osallistujat</h4>
-        <ul>
-            ${nimet}
-        </ul>
+        <p><strong>Osallistujat:</strong> ${nimet}</p>
     `;
 
     document.getElementById("tulos").innerHTML = html;
