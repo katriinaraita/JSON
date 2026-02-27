@@ -1,0 +1,14 @@
+{
+  "toteutus": "Digitekniikat",
+  "osallistujien_maara": 5,
+  "osallistujat": [
+    "Saara",
+    "Lotta",
+    "Jussi",
+    "Atte",
+    "Henkka"
+  ],
+  "aika": "13.1.2026 - 14.3.2026",
+  "kesto": "8 viikkoa",
+  "kuva": "https://github.com/katriinaraita/JSON/blob/main/opiskelija.jpg"
+}
