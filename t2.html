@@ -46,36 +46,32 @@
 </nav>
 
 <!-- sisältö -->
+
+    
 <div class="container mt-5">
 
     <h1>Poke Haku</h1>
 
-    <!-- Hakulaatikko -->
-    <div class="mb-3">
-    <input type="text" id="pokemonName" 
-           placeholder="Enter Pokemon name"
-     <button onclick="poke()">HAE</button><br>
-</div>
+   <input type="text" id="pokemonName" placeholder="Enter Pokemon name">
+<button onclick="poke()">HAE</button>
 
-    <!-- Kuva -->
-    <div id="kuva"></div>
+<br><br>
 
-    <!-- Käännä -->
-    <button id="kaannaBtn" class="btn btn-warning mt-3"
-            onclick="kaanna()" style="display:none;">
-        Käännä
-    </button>
+<div id="kuva"></div>
 
-    <!-- Lisätiedot -->
-    <div id="lisatiedot" class="mt-3"></div>
+<br>
 
-</div>
+<button id="kaannaBtn" onclick="kaanna()" style="display:none;">
+    Käännä
+</button>
 
-    <script>
+<div id="lisatiedot"></div>
 
-let nykyinenPokemon = null; 
+<script>
 
-// HAE
+let nykyinenPokemon = null;
+
+// Haku
 function poke() {
 
     let nimi = document.getElementById("pokemonName").value.toLowerCase();
@@ -84,47 +80,45 @@ function poke() {
         .then(response => response.json())
         .then(obj => {
 
-            nykyinenPokemon = obj;   
-            pokekuva(obj);           
+            nykyinenPokemon = obj;
 
-            // Käännä
-            document.getElementById("kaannaBtn").style.display = "inline-block";
+            pokekuva(obj);
 
-            // Tyhjennetään hakukenttä
+            document.getElementById("kaannaBtn").style.display = "inline";
+
             document.getElementById("pokemonName").value = "";
+
+            document.getElementById("lisatiedot").innerHTML = "";
 
         })
         .catch(error => {
             document.getElementById("kuva").innerHTML =
-                "<p class='text-danger'>Pokemonia ei löytynyt</p>";
+                "Pokemonia ei löytynyt";
         });
 }
 
 
-// Etukuva
+// Kuva 1
 function pokekuva(obj) {
 
     document.getElementById("kuva").innerHTML =
-        `<img src="${obj.sprites.front_default}" class="img-fluid">`;
+        "<img src='" + obj.sprites.front_default + "'>";
 
 }
 
-        function kaanna() {
+
+// Kääntää pokemonin
+function kaanna() {
 
     let obj = nykyinenPokemon;
 
-    // Takakuva
     document.getElementById("kuva").innerHTML =
-        `<img src="${obj.sprites.back_default}" class="img-fluid">`;
+        "<img src='" + obj.sprites.back_default + "'>";
 
-    // lisätiedot
-    let tiedot = `
-        <h3>Ominaisuudet</h3>
-
-        <p><strong>Pituus:</strong> ${obj.height}</p>
-        <p><strong>Paino:</strong> ${obj.weight}</p>
-        <p><strong>Tyyppi:</strong> ${obj.types.map(t => t.type.name).join(", ")}</p>
-    `;
+    let tiedot = "<h3>Ominaisuudet</h3>" +
+                 "<p>Pituus: " + obj.height + "</p>" +
+                 "<p>Paino: " + obj.weight + "</p>" +
+                 "<p>Tyyppi: " + obj.types[0].type.name + "</p>";
 
     document.getElementById("lisatiedot").innerHTML = tiedot;
 }
