@@ -7,6 +7,28 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--JSON Tuonti -->
+    <script>
+fetch("tietue.json")
+    .then(function(response) {
+        return response.json();   
+    })
+    .then(function(data) {
+
+        console.log(data); 
+
+        document.getElementById("tulos").innerHTML =
+            "<h3>" + data.otsikko + "</h3>" +
+            "<p>" + data.kuvaus + "</p>";
+
+    })
+    .catch(function(error) {
+        console.log("Virhe:", error);
+    });
+</script>
+
+    
 </head>
 
 <body>
@@ -54,6 +76,13 @@
 
     <h1>Tehtävä 1 — Osa 1</h1>
     <p>Tälle sivulle tulee JSON-datan ensimmäinen käsittely.</p>
+
+    <!-- JSON -->
+    <div class="container mt-4">
+    <h2>JSON-data</h2>
+    <div id="tulos"></div>
+</div>
+    
 
 </div>
 
