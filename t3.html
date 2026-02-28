@@ -49,7 +49,54 @@
 <div class="container mt-5">
 
     <h1>Tehtävä 3</h1>
-    <p>Tälle sivulle tulee JSON-datan ensimmäinen käsittely.</p>
+
+    <h2>Sää Helsingissä</h2>
+
+    <div id="tulos"></div>
+
+<script>
+
+    //Hae sää
+
+haeSaa();
+
+function haeSaa() {
+
+    fetch("https://api.openweathermap.org/data/2.5/weather?id=658225&appid=665ecd56dfc08dbb50feb8b8f5034e28&lang=fi&units=metric")
+        .then(response => response.json())
+        .then(data => naytaSaa(data))
+        .catch(error => {
+            document.getElementById("tulos").innerHTML =
+                "Säätietoja ei voitu hakea";
+        });
+}
+
+function naytaSaa(data) {
+
+    let nyt = new Date();
+
+    let aika =
+        nyt.getHours().toString().padStart(2,"0") + ":" +
+        nyt.getMinutes().toString().padStart(2,"0");
+
+    // Kuva
+    let ikoni = data.weather[0].icon;
+
+    let ikoniosoite =
+        "https://openweathermap.org/img/wn/" + ikoni + "@2x.png";
+
+    let html =
+        "<h2>" + data.name + "</h2>" +
+        "<img src='" + ikoniosoite + "'>" +
+        "<p>Sää: " + data.weather[0].description + "</p>" +
+        "<p>Lämpötila: " + data.main.temp + " °C</p>" +
+        "<p>Tuuli: " + data.wind.speed + " m/s</p>" +
+        "<p><strong>Tiedot haettu klo:</strong> " + aika + "</p>";
+
+    document.getElementById("tulos").innerHTML = html;
+}
+
+</script>
 
 </div>
 
