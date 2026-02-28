@@ -91,7 +91,7 @@ function naytaSaa(data) {
         "<p>Sää: " + data.weather[0].description + "</p>" +
         "<p>Lämpötila: " + data.main.temp + " °C</p>" +
         "<p>Tuuli: " + data.wind.speed + " m/s</p>" +
-        "<p><strong>Kello:</strong> " + aika + "</p>";
+        "<p>Sää kello:" + aika + "</p>";
 
     document.getElementById("tulos").innerHTML = html;
 }
