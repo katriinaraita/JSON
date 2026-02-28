@@ -53,7 +53,6 @@
     <!-- JSON -->
      
     <div class="container mt-4">
-    <h2>JSON-tiedot</h2>
     <div id="tulos"></div>
 </div>
     
@@ -86,7 +85,7 @@ function kerro(data) {
     teksti += "<img src='" + data.kuva + "' class='img-fluid mb-3' width='300'>";
 
     // Opintojakso
-    teksti += "<h3>Opintojakso</h3>";
+    teksti += "<h2>Opintojakso</h2>";
     teksti += "<p><strong>Nimi:</strong> " + data.opintojakso.nimi + "</p>";
     teksti += "<p><strong>Tunnus:</strong> " + data.opintojakso.tunnus + "</p>";
     teksti += "<p><strong>Opintopisteet:</strong> " + data.opintojakso.opintopisteet + "</p>";
@@ -102,7 +101,7 @@ function kerro(data) {
 
     //Silmukka - Tekniikat
 
-    teksti += "<h4>Tekniikat</h4><ul>";
+    teksti += "<h3>Tekniikat</h3><ul>";
 
     for (let i = 0; i < data.tekniikat.length; i++) {
         teksti += "<li>" +
